@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: black;
+      color: #00ff00;
+      font-family: "Courier New", monospace;
+      font-size: 4.2vw; /* Responsive text size for mobile */
+    }
+
+    #terminal {
+      padding: 15px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 1em;
+      background-color: #00ff00;
+      margin-left: 2px;
+      animation: blink 1s step-start infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal">Initializing hack.exe...</div>
+
+  <script>
+    const terminal = document.getElementById("terminal");
+    const cursor = document.createElement('span');
+    cursor.classList.add('cursor');
+    cursor.innerHTML = '&nbsp;';
+    terminal.appendChild(cursor);
+
+    const lines = [
+  "[+] YOU HAVE BEEN HACKED 😈",
+  "[+] Connecting to target device...",
+  "[+] IP address: 192.168.0.104",
+  "[+] Port 8080 open - Access granted",
+  "[+] Camera access: ENABLED ",
+  "[+] Downloading files...",
+  "[+] Injecting system payload...",
+  "[+] Browsing history collected ",
+  "[+] Data upload in progress...",
+  "[+] Report sent to FBI server",
+  "[!] DON'T CLOSE THE TAB ⚠️ "
+    ];
+
+    let lineIndex = 0;
+    let charIndex = 0;
+
+    function typeLine() {
+      if (lineIndex >= lines.length) {
+        cursor.remove();
+        terminal.innerHTML += "\n\n<HACKED> \n\n FAKE😜 \n revok ";
+        return;
+      }
+
+      const line = lines[lineIndex];
+      if (charIndex < line.length) {
+        const char = document.createTextNode(line.charAt(charIndex));
+        terminal.insertBefore(char, cursor);
+        charIndex++;
+        setTimeout(typeLine, 30);
+      } else {
+        terminal.insertBefore(document.createTextNode('\n'), cursor);
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(typeLine, 700);
+      }
+
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    setTimeout(() => {
+      terminal.innerHTML = "[+] Initializing hack.exe...\n";
+      terminal.appendChild(cursor);
+      typeLine();
+    }, 1000);
+  </script>
+</body>
+</html>
